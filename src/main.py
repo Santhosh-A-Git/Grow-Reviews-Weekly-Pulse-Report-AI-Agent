@@ -1,6 +1,8 @@
 import asyncio
 import os
 import time
+import sys
+import subprocess
 
 def run_step(step_name, script_name):
     print(f"\n{'='*50}")
@@ -8,7 +10,8 @@ def run_step(step_name, script_name):
     print(f"{'='*50}")
     start_time = time.time()
     
-    exit_code = os.system(f"py src\\{script_name}")
+    script_path = os.path.join("src", script_name)
+    exit_code = subprocess.call([sys.executable, script_path])
     
     elapsed = time.time() - start_time
     if exit_code == 0:
