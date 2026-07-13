@@ -34,9 +34,9 @@ export default function Home() {
       const res = await fetch(`${API_BASE}/generate`, { method: "POST" });
       const data = await res.json();
       setJobId(data.job_id);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("failed");
-      setError(err.message || "Failed to connect to backend");
+      setError(err instanceof Error ? err.message : "Failed to connect to backend");
     }
   };
 
